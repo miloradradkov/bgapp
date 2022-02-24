@@ -1,2 +1,5 @@
-FROM php:8.0-apache
+FROM php:7-fpm
 RUN docker-php-ext-install pdo_mysql
+RUN apt-get update && apt-get install -y nginx
+ENTRYPOINT ["/bin/sh", "-c" , "/usr/local/sbin/php-fpm -D && /usr/sbin/nginx -g 'daemon off;'"]
+EXPOSE 80

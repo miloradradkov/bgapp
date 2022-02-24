@@ -3,13 +3,15 @@ services:
     web:
         image: cnfdnc/bgapp-web
         deploy:
-            replicas: 5
+            replicas: 3
         ports:
             - 8080:80
         volumes:
             - "${PROJECT_ROOT}:/var/www/html:ro"
+            - ./default:/etc/nginx/sites-enabled/default:ro
         networks:
             - app-network
+    
     db:
         image: cnfdnc/bgapp-db
         networks:
